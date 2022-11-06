@@ -1,6 +1,6 @@
 [package]
 name = "aidk"
-version = "0.2.4"
+version = "0.2.5"
 authors = ["Knoxius <knox.dev@proton.me>"]
 license = "WTFPL"
 description = "Actually I Don't Know"
