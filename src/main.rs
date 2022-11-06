@@ -1,4 +1,3 @@
-use console::style;
 use std::io;
 use clap::Parser;
 
@@ -13,12 +12,15 @@ use clap::Parser;
     path: std::path::PathBuf,
 }
 
-fn main() {
-    // Something something
-    let args = Aidk::parse();
-    let content = std::fs::read_to_string(&args.path).expect("could not read file");
+#[derive(Debug)]
+struct Error(String);
+
+fn main() -> Result<(), Error> {
+    let path = "test.txt";
+    let content = std::fs::read_to_string(path)
+        .map_err(|err| Error(format!("Annnnd the error is `{}`: {} TwT", path, err)))?;
     // Welcome screen
-    println!("{}", style("Welcome to hell uvu\n").bold().green());
+    println!("Welcome to hell uvu\n");
     // Variable to store the word
     let mut word = String::new();
     // Reading the line
@@ -28,13 +30,10 @@ fn main() {
     // Clear terminal
     print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
     // Print out
-    println!("{}", style(word).yellow());
+    println!("{}", word);
     // End screen
-    println!("{}", style("Enjoy you're stay <3\n").bold().red());
-    // Print out args and pattern
-    for line in content.lines() {
-        if line.contains(&args.pattern) {
-            println!("{}", line);
-        }
-    }
+    println!("Enjoy you're stay <3\n");
+    // Print content
+    println!("Oh ya, the file contents are {:#?} :^", content);
+    Ok(())
 }
