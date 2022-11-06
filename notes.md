@@ -51,7 +51,7 @@ println!("Welcome to hell uvu\n");
 let mut word = String::new();
 ```
 
-### [Reading input 32:35](src/main.rs#L32)
+### [Reading input 32:35](src/main.rs#L32#L35)
 ```rust
 io::stdin()
     .read_line(&mut word)
