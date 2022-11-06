@@ -1,5 +1,6 @@
-use std::io;
+use std::{io, time::Duration, thread};
 use clap::Parser;
+use indicatif::ProgressBar;
 
 // Error E0277 =P
 #[derive(Debug)]
@@ -16,8 +17,18 @@ use clap::Parser;
 struct Error(String);
 
 fn main() -> Result<(), Error> {
+    // Loading...
+    println!("Loading bullshit...hope it fails lol");
+    let pb = ProgressBar::new(1024);
+    for _ in 0..1024 {
+        pb.inc(1);
+        thread::sleep(Duration::from_millis(5));
+    }
+    // Get the path
     let path = "test.txt";
+    // Read the file
     let content = std::fs::read_to_string(path)
+    // Bloody errors TwT
         .map_err(|err| Error(format!("Annnnd the error is `{}`: {} TwT", path, err)))?;
     // Welcome screen
     println!("Welcome to hell uvu\n");
