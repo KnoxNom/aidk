@@ -1,6 +1,13 @@
+#![allow(unused)]
+use crate::prelude::*;
 use std::{io, time::Duration, thread};
+use std::io::BufReader;
 use clap::Parser;
 use indicatif::ProgressBar;
+
+mod error;
+mod prelude;
+mod utils;
 
 #[derive(Debug)]
 #[derive(Parser)]
@@ -9,10 +16,7 @@ use indicatif::ProgressBar;
     path: std::path::PathBuf,
 }
 
-#[derive(Debug)]
-struct Error(String);
-
-fn main() -> Result<(), Error> {
+fn main() -> Result<()> {
     println!("Loading aidk...hope it fails lol");
 
     let pb = ProgressBar::new(1024);
@@ -20,10 +24,6 @@ fn main() -> Result<(), Error> {
         pb.inc(1);
         thread::sleep(Duration::from_millis(5));
     }
-
-    let path = "test.txt";
-    let content = std::fs::read_to_string(path)
-        .map_err(|err| Error(format!("Annnnd the error is `{}`: {} TwT", path, err)))?;
 
     println!("Welcome to hell uvu\n");
 
@@ -39,6 +39,7 @@ fn main() -> Result<(), Error> {
 
     println!("Enjoy you're stay <3\n");
 
-    println!("Oh ya, the file contents are {:#?} :^", content);
+    println!("Oh ya, the file contents are :^\n");
+
     Ok(())
 }
