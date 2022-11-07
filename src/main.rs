@@ -1,7 +1,9 @@
 #![allow(unused)]
 use crate::prelude::*;
+use std::io::prelude::*;
 use std::{io, time::Duration, thread};
 use std::io::BufReader;
+use std::fs::File;
 use clap::Parser;
 use indicatif::ProgressBar;
 
@@ -16,7 +18,7 @@ mod utils;
     path: std::path::PathBuf,
 }
 
-fn main() -> Result<()> {
+fn main() -> std::io::Result<()> {
     println!("Loading aidk...hope it fails lol");
 
     let pb = ProgressBar::new(1024);
@@ -41,5 +43,12 @@ fn main() -> Result<()> {
 
     println!("Oh ya, the file contents are :^\n");
 
+    let f = File::open("test.txt")?;
+    let mut reader = BufReader::new(f);
+
+    let mut line = String::new();
+    let len = reader.read_line(&mut line)?;
+    println!("Damn the first line is {} bytes long XD", len);
+    
     Ok(())
 }

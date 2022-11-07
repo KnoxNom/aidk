@@ -1,5 +1,7 @@
 # Notes
 
+## [main.rs](src/main.rs)
+
 ### [Error E0277 =P 5:0](src/main.rs#L5)
 ```rust
 #[derive(Debug)]
@@ -76,4 +78,29 @@ pirntln!("Enjoy you're stay <3\n");
 ### [Print out file content 42:0](src/main.rs#L42)
 ```rust
 println!("Oh ya, the file contents are {:#?} :^", content);
+```
+
+### [Make a variable to open the file 46:0](src/main.rs#L46)
+```rust
+let f = File::open("test.txt")?;
+```
+
+### [Make a new variable to read 47:0](src/main.rs#L47)
+```rust
+let mut reader = BufReader::new(f);
+```
+
+### [Make another new variable with the type string 49:0](src/main.rs#L49)
+```rust
+let mut line = String::new();
+```
+
+### [Another one to read the line and output length 50:0](src/main.rs#L50)
+```rust
+let len = reader.read_line(&mut line)?;
+```
+
+### [Finally print out the message and length in bytes 51:0](src/main.rs#L51)
+```rust
+println!("Damn the first line is {} bytes long XD", len);
 ```
